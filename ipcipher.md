@@ -11,14 +11,12 @@ There are many ways to do this, especially for IPv6, but the method
 described here is simple and interoperable.  This page:
 
  * Describes the algorithms used to encrypt/decrypt IP addresses
- * How to derive the key from a password
- * Links to research papers
+ * Specifies how to derive the key from a password
  * Links to reference implementations in various languages
- * Gives a set of published test vectors to test interoperabilty
+ * Provides a set of published test vectors to test interoperabilty
 
 In order to enhance interoperability, implementations that want to encrypt
-IP addresses are encouraged to do so as described in this 'ipcipher'
-standard.
+IP addresses are encouraged to do so using this 'ipcipher' standard.
 
 Why encrypt IP addresses?
 =========================
@@ -30,9 +28,9 @@ Per-customer/subscriber traces are extremely useful for researching the
 security of networks.  However, privacy officers rightly object the
 unbridled sharing of which IP address did what. 
 
-One potential solution is to encrypt IP addresses in log files with a secret
-key. Crucially, this can be done in a way that the IP addresses still look
-like IP addresses. 
+One potential solution is to encrypt IP addresses in log files or PCAPs with
+a secret key.  Crucially, this can be done in a way that the IP addresses
+still look like IP addresses, and can be stored 'in place'.
 
 The encryption key is held by the privacy officer, or their department, and
 if based on encrypted IP addresses something interesting is found, the
@@ -42,12 +40,6 @@ The needs and merits of IP encryption are further explored in '[On IP address en
 privacy](https://medium.com/@bert.hubert/on-ip-address-encryption-security-analysis-with-respect-for-privacy-dabe1201b476)'.
 Importantly, this also touches on inherent limitations of encrypting IP
 addresses for privacy.
-
-Specification
-=============
-This specification can be referred to as 'ipcipher'. It describes how to
-encrypt and decrypt IPv4 and IPv6 addresses. In addition, this document
-standardizes how to derive the secret key from a passphrase.
 
 Key derivation
 ==============
@@ -59,7 +51,7 @@ DK = PBKDF2(SHA1, Password, "ipcipheripcipher", 50000, 16)
 ```
 
 Or in words, RFC 2898 with SHA1 as hashing function, `ipcipheripcipher` as
-salt, 50000 iterations, to derive 16 bytes of key `DK`. In OpenSSL this
+salt, 50000 iterations, 16 bytes of key `DK`. In OpenSSL this
 corresponds to:
 
 ```
@@ -69,10 +61,11 @@ corresponds to:
 
 ```
 
-Do not skip the key derivation step. The `ipcrypt` algorithm used for
-IPv4 requires a fully randomized key and is not secure without it.
+The key derivation step is not optional.  The `ipcrypt` algorithm used for
+IPv4 requires a fully randomized key and is not secure without it. In
+addition, PBKDF2 protects against brute forcing of the passphrase.
 
-Some test vectors, where first entry is an empty string:
+Some test vectors for key derivation, where first entry is an empty string:
 
  * "" -> 99 be 12 3a c5 f8 67 db 37 19 3d b7 ae e6 7e 73
  * "3.141592653589793" -> 23 07 23 58 ad cb 9b 23 05 57 4e 23 29 1b 40 ad
@@ -156,9 +149,7 @@ Using the password "crypto is not a coin":
  * 2001:503:ba3e::2:30 -> d8a9:27d7:b9d1:492f:670e:6ffc:e427:fe49
  * 2001:DB8:: -> 6709:bdb1:cd1e:354f:ebfb:5775:fb51:8e64
 
-Note that in general, encrypted IPv6 addresses become longer when measured
-in presentation format.
-
+Note that this password needs to be used to derive they key first.
 
 <script>window.markdeepOptions={};
 window.markdeepOptions.tocStyle="short";</script>
