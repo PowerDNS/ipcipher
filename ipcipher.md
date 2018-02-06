@@ -1,6 +1,10 @@
                 <meta charset="utf-8" emacsmode="-*- markdown -*-">
                             **ipcipher: encrypting IP addresses**
 
+STATUS: This standard is open for discussion. We hope to finalize it
+quickly - bert.hubert@powerdns.com /
+[@PowerDNS_Bert](https://twitter.com/PowerDNS_Bert).
+
 ipcipher
 ========
 This page documents a simple way to encrypt IPv4 and IPv6 addresses such
