@@ -59,9 +59,9 @@ salt, 50000 iterations, 16 bytes of key `DK`. In OpenSSL this
 corresponds to:
 
 ```
-  static const char* salt="ipcipheripcipher";
+  static const char salt[]="ipcipheripcipher";
   unsigned char out[16];
-  PKCS5_PBKDF2_HMAC_SHA1(passwordptr, passwordlen, (const unsigned char*)salt, sizeof(salt), 50000, sizeof(out), out);
+  PKCS5_PBKDF2_HMAC_SHA1(passwordptr, passwordlen, (const unsigned char*)salt, sizeof(salt)-1, 50000, sizeof(out), out);
 
 ```
 
@@ -71,11 +71,11 @@ addition, PBKDF2 protects against brute forcing of the passphrase.
 
 Some test vectors for key derivation, where first entry is an empty string:
 
- * "" -> 99 be 12 3a c5 f8 67 db 37 19 3d b7 ae e6 7e 73
- * "3.141592653589793" -> 23 07 23 58 ad cb 9b 23 05 57 4e 23 29 1b 40 ad
- * "crypto is not a coin" -> c8 18 0e 56 05 6d 3e cb f8 50 50 0b fd 84 19 3d 
+ * "" -> 4c 8e 8d c8 ce 06 c8 d0 ec 0e 4d 6c 52 87 7d 14
+ * "3.141592653589793" -> 21 c8 26 22 92 92 da db b6 89 1e 6c f2 b6 ee 33
+ * "crypto is not a coin" -> 7f 98 fa c5 02 23 b4 00 95 be 6d df 89 5b a3 b9
  
-Take care not to process a possible trailing 0 in the password.
+Take care not to process a possible trailing 0 in the password (or salt).
 
 IPv4 algorithm
 ==============
@@ -111,11 +111,11 @@ Using the following key in hex: 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
    
 Using the password "crypto is not a coin":
 
- * 198.41.0.4 -> 78.178.254.81
- * 130.161.180.1 -> 207.193.250.137
- * 0.0.0.0 -> 134.197.67.89
+ * 198.41.0.4 -> 36.210.18.7
+ * 130.161.180.1 -> 159.246.180.63
+ * 0.0.0.0 -> 130.24.2.219
  
-Note that this password needs to be used to derive they key first.
+Note that this password needs to be used to derive the actual key first.
 
 IPv6 algorithm
 ==============
@@ -149,11 +149,11 @@ Test vectors using the key "some 16-byte key":
 
 Using the password "crypto is not a coin":
 
- * ::1 -> 2ec1:fa64:6771:a68b:dcb:6cca:8422:5c1c
- * 2001:503:ba3e::2:30 -> d8a9:27d7:b9d1:492f:670e:6ffc:e427:fe49
- * 2001:DB8:: -> 6709:bdb1:cd1e:354f:ebfb:5775:fb51:8e64
+ * ::1 -> 7f6e:df1b:47ea:3be8:2750:22d6:b33f:b765
+ * 2001:503:ba3e::2:30 -> cdf4:8c9b:8bac:937a:4528:f454:b375:a511
+ * 2001:DB8:: -> 273d:c4c0:8afd:87a:1cfc:9d99:4342:93fa
 
-Note that this password needs to be used to derive they key first.
+Note that this password needs to be used to derive the key first.
 
 <script>window.markdeepOptions={};
 window.markdeepOptions.tocStyle="short";</script>
