@@ -103,8 +103,8 @@ Test vectors using the derived key "some 16-byte key" (minus the quotes):
  * 8.8.8.8 -> 46.48.51.50
  * 1.2.3.4 -> 171.238.15.199
  
-Using the following key in hex: 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
-16
+Using the following key in hex: 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 
+10
 
  * Start with IP address 192.168.69.42 and encrypt it 100 million times ->
    93.155.197.186 (so keep on encrypting the encrypted address)
