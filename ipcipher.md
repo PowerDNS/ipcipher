@@ -22,6 +22,18 @@ described here is simple and interoperable.  This page:
 In order to enhance interoperability, implementations that want to encrypt
 IP addresses are encouraged to do so using this 'ipcipher' standard.
 
+Known implementations:
+
+ * [In Go, by Silke Hofstra](https://github.com/silkeh/ipcipher)
+ * PowerDNS
+
+Acknowledgements
+================
+Silke Hofstra built the first interoperable implementation and found many
+mistakes in the specification and test vectors. Jean-Philippe Aumasson
+supplied the `ipcrypt` algorithm & guidance on key derivation.
+
+
 Why encrypt IP addresses?
 =========================
 Frequently, privacy concerns and regulations get in the way of security
