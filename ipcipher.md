@@ -83,9 +83,9 @@ addition, PBKDF2 protects against brute forcing of the passphrase.
 
 Some test vectors for key derivation, where first entry is an empty string:
 
- * "" -> 4c 8e 8d c8 ce 06 c8 d0 ec 0e 4d 6c 52 87 7d 14
- * "3.141592653589793" -> 21 c8 26 22 92 92 da db b6 89 1e 6c f2 b6 ee 33
- * "crypto is not a coin" -> 7f 98 fa c5 02 23 b4 00 95 be 6d df 89 5b a3 b9
+ * "" -> bb 8d cd 7b e9 a6 f4 3b 33 04 c6 40 d7 d7 10 3c
+ * "3.141592653589793" ->  37 05 bd 6c 0e 26 a1 a8 39 89 8f 1f a0 16 a3 74
+ * "crypto is not a coin" -> 06 c4 ba d2 3a 38 b9 e0 ad 9d 05 90 b0 a3 d9 3a
  
 Take care not to process a possible trailing 0 in the password (or salt).
 
@@ -123,9 +123,9 @@ Using the following key in hex: 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
    
 Using the password "crypto is not a coin":
 
- * 198.41.0.4 -> 36.210.18.7
- * 130.161.180.1 -> 159.246.180.63
- * 0.0.0.0 -> 130.24.2.219
+ * 198.41.0.4 -> 139.111.117.167
+ * 130.161.180.1 -> 66.235.221.231
+ * 0.0.0.0 -> 203.253.152.187
  
 Note that this password needs to be used to derive the actual key first.
 
@@ -161,9 +161,9 @@ Test vectors using the key "some 16-byte key":
 
 Using the password "crypto is not a coin":
 
- * ::1 -> 7f6e:df1b:47ea:3be8:2750:22d6:b33f:b765
- * 2001:503:ba3e::2:30 -> cdf4:8c9b:8bac:937a:4528:f454:b375:a511
- * 2001:DB8:: -> 273d:c4c0:8afd:87a:1cfc:9d99:4342:93fa
+ * ::1 -> a551:9cb0:c9b:f6e1:6112:58a:af29:3a6c
+ * 2001:503:ba3e::2:30 -> 6e60:2674:2fac:d383:f9d5:dcfe:fc53:328e
+ * 2001:DB8:: -> a8f5:16c8:e2ea:23b9:748d:67a2:4107:9d2e
 
 Note that this password needs to be used to derive the key first.
 
