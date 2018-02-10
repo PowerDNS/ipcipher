@@ -27,6 +27,9 @@ Known implementations:
  * [In Go, by Silke Hofstra](https://github.com/silkeh/ipcipher)
  * PowerDNS
 
+Discussion on how and when to use `ipcipher` can be found in the
+[meta](meta.md.html) document.
+
 Acknowledgements
 ================
 Silke Hofstra built the first interoperable implementation and found many
