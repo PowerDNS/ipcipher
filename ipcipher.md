@@ -92,6 +92,13 @@ Some test vectors for key derivation, where first entry is an empty string:
  
 Take care not to process a possible trailing 0 in the password (or salt).
 
+Note: it is of course also possible to use a fully random 128-bit key that
+is not derived from a passphrase. This offers some security advantages too,
+as the full 128-bit keyspace is used. Implementations are encouraged to make
+it possible to either provide a passphrase or a 128-bit string, but be
+careful that it is not possible to disambiguate between these two
+automatically!
+
 IPv4 algorithm
 ==============
 An IPv4 address is a 32 bit value, and to encrypt it to another IPv4 address
@@ -135,13 +142,14 @@ Note that this password needs to be used to derive the actual key first.
 IPv6 algorithm
 ==============
 IPv6 addresses are 128 bits, and there is a wealth of suitable algorithms
-available. AES is robust and widely available, and more than good enough.
+available.  AES-128 is robust and widely available, and more than good
+enough.
 
 AES is typically deployed in a mode like Cipher Block Chaining, but no such
 mode is required to encrypt IP addresses. A straight AES operation is used,
 with no further XORing, as in Electronic Code Book "mode".
 
-AES is almost always already available.  To get a raw AES encryption
+AES is almost always already available.  To get a raw AES-128 encryption
 operation out of OpenSSL or its variants:
 
 ```
