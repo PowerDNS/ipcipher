@@ -58,7 +58,9 @@ address can be decrypted for further action.
 The needs and merits of IP encryption are further explored in '[On IP address encryption: security analysis with respect for
 privacy](https://medium.com/@bert.hubert/on-ip-address-encryption-security-analysis-with-respect-for-privacy-dabe1201b476)'.
 Importantly, this also touches on inherent limitations of encrypting IP
-addresses for privacy.
+addresses for privacy. 
+
+Guidance on how to use `ipcipher` can be found [here](meta.md.html).
 
 Key derivation
 ==============
