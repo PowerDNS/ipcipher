@@ -63,7 +63,7 @@ Chosen plaintext attack
 Since there are only around 4.3 billion IPv4 addresses, if an attacker can
 both determine what IP addresses appear in an `ipcipher` encrypted log, and
 have access to that log, the algorithm fails at least for IPv4. This is
-because the attacked can enumerate each and every IP address to see how it
+because the attacker can enumerate each and every IPv4 address to see how it
 ends up in the log.
 
 IPv6 is not suitable for enumeration, but a chosen plaintext attack could
@@ -90,16 +90,16 @@ The procedure is then as follows:
 Specific things to watch out for
 ================================
 IP addresses should be encrypted wherever they appear in a trace or a log.
-This is not always easy. Of specific note, as ICMP messages may for example
+This is not always easy. Of specific note, ICMP messages may for example
 contain another copy of the source or destination IP address of the packet.
 So when encrypting PCAPs, make sure to drop any traffic known to contain
-further copies of actual IP addresses.
+further copies of actual IP addresses that you aren't also encrypting.
 
 Of specific note, tunnelled but unencrypted traffic (GRE, VXLAN, IPIP, SIT)
-is guaranteed to carry further IP addresses 'inside'.
+is guaranteed to carry further IP addresses 'inside'. 
 
-It may in practice be easier to restrict PCAP captures to only the intended
-protocol (say, DNS).
+It is advised to restrict PCAP captures to only the intended protocol (say,
+DNS).
 
 When encrypting text-based log files, be sure to encrypt not only 1.2.3.4
 but also 1.2.3.4:25. Similarly, ::1 should be encrypted, but also [::1]:25
@@ -121,6 +121,8 @@ adddresses with 24 different keys, for example.
 In general however, should data leak, damage will be significantly less if
 IP addresses were encrypted than if they had not been encrypted. 
 
+Another way to look at it is that encrypting IP addresses is always a win,
+unless the traces are suddenly shared more widely than before.
 
 <script>window.markdeepOptions={};
 window.markdeepOptions.tocStyle="short";</script>
