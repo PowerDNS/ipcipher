@@ -1,0 +1,127 @@
+                <meta charset="utf-8" emacsmode="-*- markdown -*-">
+                            **ipcipher: discussion and guidance**
+
+ipcipher
+========
+`ipcipher` is a simple way to encrypt IPv4 and IPv6 addresses such
+that any address encrypts to a valid address.  This enables existing tools
+to be used on encrypted IPv4 and IPv6 addresses.
+
+The protocol is described [here](ipcipher.md.html).  
+
+This page is about how and when to use the protocol, and what guarantees it
+does and does not offer.
+
+Applicability
+=============
+`ipcipher` is meant to be enable the analysis of traces, pcaps, logfiles etc
+containing customer IP addresses, without revealing those actual (customer)
+IP addresses.  Given privacy trends around the world and specifically the
+advent of [EU GDPR](https://www.eugdpr.org/), it is more and more important
+to protect personally identifying information.
+
+`ipcipher` is not in any way meant as an encryption algorithm that enables
+the public dissemination of traces without impacting user privacy. It should
+not be compared to, say, AES or Salsa20.
+
+In other words, `ipcipher` encrypted IP addresses must still be protected.
+This is because of inherent limitations of
+'[pseudonymisation](https://en.wikipedia.org/wiki/Pseudonymization)'. 
+
+Limitations of pseudonimity
+===========================
+
+From the [Wikipedia](https://en.wikipedia.org/wiki/Pseudonymization):
+
+> Pseudonymization is a procedure by which the most identifying fields
+> within a data record are replaced by one or more artificial identifiers,
+> or pseudonyms.  (...) The purpose is to render the data record less
+> identifying and therefore lower customer or patient objections to its use. 
+> Data in this form is suitable for extensive analytics and processing.
+
+Pseudonymous data can be analysed just like regular data. So for example, a
+PCAP of a user-originated denial of service attack can be studied using
+regular tools to identify the pseudonymous IP addresses performing the
+attack.
+
+These IP addresses can subsequently be decrypted to identify the actual
+culprits.
+
+If however the PCAP file contains more information, it may be possible to
+deanonymize the encrypted IP addresses. For example, HTTP requests may
+contain the actual user IP address as a referrer. This ties the encrypted
+address to the original, and breaks pseudonimization.
+
+Another famous example was the [AOL search data
+leak](https://en.wikipedia.org/wiki/AOL_search_data_leak) in which AOL
+released search queries for AOL user-ids, without revealing user names. It
+rapidly proved possible however to identify specific users based on their
+search traffic.
+
+Chosen plaintext attack
+=======================
+Since there are only around 4.3 billion IPv4 addresses, if an attacker can
+both determine what IP addresses appear in an `ipcipher` encrypted log, and
+have access to that log, the algorithm fails at least for IPv4. This is
+because the attacked can enumerate each and every IP address to see how it
+ends up in the log.
+
+IPv6 is not suitable for enumeration, but a chosen plaintext attack could
+still be used to verify a potential actual IP address candidate.
+
+Suggested doctrine
+==================
+It is suggested that a new passphrase is used whenever new data is encrypted
+for analysis.  This minimizes the opportunity for attackers to benefit from
+previous re-identification efforts.
+
+The procedure is then as follows:
+
+ * Collect data to be analysed
+ * Create a random passphrase, possibly using `pwgen`
+ * Store passphrase securely
+ * Encrypt IP addresses in trace/log/pcap
+ * Send data off for analysis
+ * If analysts have found interesting pseudonomyzed IP addresses, decrypt
+    using stored key
+ * Analysis team destroys encrypted trace data
+ * Passphrase can be destroyed
+ 
+Specific things to watch out for
+================================
+IP addresses should be encrypted wherever they appear in a trace or a log.
+This is not always easy. Of specific note, as ICMP messages may for example
+contain another copy of the source or destination IP address of the packet.
+So when encrypting PCAPs, make sure to drop any traffic known to contain
+further copies of actual IP addresses.
+
+Of specific note, tunnelled but unencrypted traffic (GRE, VXLAN, IPIP, SIT)
+is guaranteed to carry further IP addresses 'inside'.
+
+It may in practice be easier to restrict PCAP captures to only the intended
+protocol (say, DNS).
+
+When encrypting text-based log files, be sure to encrypt not only 1.2.3.4
+but also 1.2.3.4:25. Similarly, ::1 should be encrypted, but also [::1]:25
+and ::1#25, as well as fe80::1%eth0. 
+
+Protection level that should be accorded to encrypted IP addresses
+==================================================================
+In general, the more data is stored, the higher should the protection level
+be, even with encrypted IP addresses.
+
+As an example, a trace of 100 DNS packets from 100 different IP addresses
+does not offer a lot of scope for deanonymization. Hower, a full day
+recording of millions of IP addresses should not be shared as if it can't be
+deanonymized. 
+
+A lesser risk can already be achieved by encrypting 24 hours of IP
+adddresses with 24 different keys, for example.
+
+In general however, should data leak, damage will be significantly less if
+IP addresses were encrypted than if they had not been encrypted. 
+
+
+<script>window.markdeepOptions={};
+window.markdeepOptions.tocStyle="short";</script>
+<!--  Markdeep:  --><style  class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script  src="markdeep.min.js"></script><script  src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
