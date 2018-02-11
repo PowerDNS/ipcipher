@@ -117,7 +117,7 @@ Implementations:
 
  * [C](https://github.com/jedisct1/c-ipcrypt) by Frank Denis
  * [Python](https://github.com/veorq/ipcrypt) by Jean-Philippe Aumasson
- * [Go](https://github.com/veorq/ipcrypt) by Jean-Philips Aumasson
+ * [Go](https://github.com/veorq/ipcrypt) by Jean-Philippe Aumasson
 
 Note that the Python and Go repository also includes command line tools.
  
