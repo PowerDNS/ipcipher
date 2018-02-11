@@ -34,7 +34,8 @@ Acknowledgements
 ================
 Silke Hofstra built the first interoperable implementation and found many
 mistakes in the specification and test vectors. Jean-Philippe Aumasson
-supplied the `ipcrypt` algorithm & guidance on key derivation.
+supplied the `ipcrypt` algorithm & guidance on key derivation. Further thanks to: 
+Frank Denis for providing the C implementation of `ipcrypt` and general advice. 
 
 
 Why encrypt IP addresses?
