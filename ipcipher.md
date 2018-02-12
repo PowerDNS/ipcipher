@@ -117,10 +117,12 @@ else.
 Implementations:
 
  * [C](https://github.com/jedisct1/c-ipcrypt) by Frank Denis
- * [Python](https://github.com/veorq/ipcrypt) by Jean-Philippe Aumasson
  * [Go](https://github.com/veorq/ipcrypt) by Jean-Philippe Aumasson
+ * [Python](https://github.com/veorq/ipcrypt) by Jean-Philippe Aumasson
+ * [Rust](https://github.com/stbuehler/rust-ipcrypt) by Stefan Bühler
 
-Note that the Python and Go repository also includes command line tools.
+Note that the (combine) Python and Go repository also includes command line
+tools.
  
 Test vectors using the derived key "some 16-byte key" (minus the quotes):
 
