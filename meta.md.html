@@ -108,6 +108,11 @@ When encrypting text-based log files, be sure to encrypt not only 1.2.3.4
 but also 1.2.3.4:25. Similarly, ::1 should be encrypted, but also [::1]:25
 and ::1#25, as well as fe80::1%eth0. 
 
+Additionally, when stamping out IPv4 or IPv6 addresses in data structures
+with checksums (like IP headers), be sure to also update (or zero) those
+checksums, as these may provide a weak or even strong indication of the
+original IP address.
+
 Protection level that should be accorded to encrypted IP addresses
 ==================================================================
 In general, the more data is stored, the higher should the protection level

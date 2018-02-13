@@ -35,7 +35,9 @@ Acknowledgements
 Silke Hofstra built the first interoperable implementation and found many
 mistakes in the specification and test vectors. Jean-Philippe Aumasson
 supplied the `ipcrypt` algorithm & guidance on key derivation. Further thanks to: 
-Frank Denis for providing the C implementation of `ipcrypt` and general advice. 
+Frank Denis for providing the C implementation of `ipcrypt` and general
+advice, Edwin van Vliet for noting the risk of checksums providing hint of
+old IP address.
 
 
 Why encrypt IP addresses?
@@ -121,7 +123,7 @@ Implementations:
  * [Python](https://github.com/veorq/ipcrypt) by Jean-Philippe Aumasson
  * [Rust](https://github.com/stbuehler/rust-ipcrypt) by Stefan Bühler
 
-Note that the (combine) Python and Go repository also includes command line
+Note that the (combined) Python and Go repository also includes command line
 tools.
  
 Test vectors using the derived key "some 16-byte key" (minus the quotes):
