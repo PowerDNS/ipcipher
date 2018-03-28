@@ -26,6 +26,7 @@ Known implementations:
 
  * [In Go, by Silke Hofstra](https://github.com/silkeh/ipcipher)
  * PowerDNS
+ * [In Perl, by Hugo Salgado](https://github.com/huguei/ipcipher)
 
 Discussion on how and when to use `ipcipher` can be found in the
 [meta](meta.md.html) document.
@@ -122,6 +123,7 @@ Implementations:
  * [Go](https://github.com/veorq/ipcrypt) by Jean-Philippe Aumasson
  * [Python](https://github.com/veorq/ipcrypt) by Jean-Philippe Aumasson
  * [Rust](https://github.com/stbuehler/rust-ipcrypt) by Stefan Bühler
+ * [Perl](https://github.com/huguei/p5-Net-Address-IP-Cipher) by Hugo Salgado
 
 Note that the (combined) Python and Go repository also includes command line
 tools.
